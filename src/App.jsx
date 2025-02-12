@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Title from "./components/Title";
 import Description from "./components/Description";
 import Status from "./components/Status";
@@ -6,6 +6,19 @@ import Language from "./components/Language";
 import languages from "./languages";
 
 export default function EscAssembly() {
+  const [currentWord, setCurrentWord] = useState("react");
+
+  const arrToString = currentWord.split("");
+
+  const wordElements = arrToString.map((word, id) => (
+    <span
+      key={id}
+      className="bg-slate-600 rounded-t-md mx-1 border-b-2 border-white px-[24px] py-2 "
+    >
+      {word.toUpperCase()}
+    </span>
+  ));
+
   return (
     <div className="flex min-h-screen bg-[#262730] items-center flex-col">
       <header>
@@ -25,6 +38,9 @@ export default function EscAssembly() {
           />
         ))}
       </div>
+      <span className="text-white font-bold text-4xl w-full  flex items-center justify-center">
+        {wordElements}
+      </span>
     </div>
   );
 }
