@@ -4,19 +4,15 @@ import Description from "./components/Description";
 import Status from "./components/Status";
 import Language from "./components/Language";
 import languages from "./languages";
+import clsx from "clsx";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function EscAssembly() {
   const [currentWord, setCurrentWord] = useState("react");
   const [selectedLetter, setSelectedLetter] = useState([]);
-  console.log(selectedLetter);
-
-  const selectedLetterElement = selectedLetter.map((letter) => (
-    <span className="text-3xl text-red-500" key={letter}>
-      {letter}
-    </span>
-  ));
 
   function addGuessedLetter(newLetter) {
+    toast.success(newLetter);
     setSelectedLetter((prevSelectedLetter) =>
       prevSelectedLetter.includes(newLetter)
         ? prevSelectedLetter
@@ -24,22 +20,33 @@ export default function EscAssembly() {
     );
   }
 
-  const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+  const alphabets = "abcdefghijklmnopqrstuvwxyz".split("");
 
-  const alphabetElements = alphabet.map((letter) => (
-    <button
-      key={letter}
-      className="alphabet-elements"
-      onClick={() => addGuessedLetter(letter)}
-    >
-      {letter.toUpperCase()}
-    </button>
-  ));
+  const alphabetElements = alphabets.map((letter) => {
+    const isSelected = selectedLetter.includes(letter);
+    const isCorrect = isSelected && currentWord.includes(letter);
+    const isWrong = isSelected && !currentWord.includes(letter);
+
+    const className = clsx("alphabet-elements bg-[#2D519F]", {
+      correct: isCorrect,
+      wrong: isWrong,
+    });
+
+    return (
+      <button
+        key={letter}
+        className={className}
+        onClick={() => addGuessedLetter(letter)}
+      >
+        {letter.toUpperCase()}
+      </button>
+    );
+  });
 
   const arrToString = currentWord.split("");
 
-  const wordElements = arrToString.map((word, id) => (
-    <span key={id} className="word-elements">
+  const wordElements = arrToString.map((word) => (
+    <span key={word} className="word-elements">
       {word.toUpperCase()}
     </span>
   ));
@@ -71,6 +78,7 @@ export default function EscAssembly() {
       </section>
 
       <button className="btn-newgame">New Game</button>
+      <Toaster position="top-right" />
     </main>
   );
 }

@@ -30,7 +30,7 @@ body {
 }
 
 .alphabet-elements {
-  @apply bg-[#2D519F] font-bold px-5 py-3 flex shadow-[0_1px_1px] hover:shadow-[0_2px_5px] transition-all cursor-pointer text-white shadow-white w-18 items-center flex-col rounded;
+  @apply font-bold px-5 py-3 flex shadow-[0_1px_1px] hover:shadow-[0_2px_5px] transition-all cursor-pointer text-white shadow-white w-18 items-center flex-col rounded;
 }
 
 button {
@@ -50,4 +50,12 @@ button {
 .status,
 .alphabet {
   text-shadow: 1px 5px 5px black;
+}
+
+.correct {
+  background-color: #10a95b;
+}
+
+.wrong {
+  background-color: #ec5d49;
 }
