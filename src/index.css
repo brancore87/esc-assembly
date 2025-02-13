@@ -22,7 +22,7 @@ body {
 }
 
 .word-elements {
-  @apply bg-slate-600 rounded-t-md mx-1 border-b-2 border-white px-[24px] py-2;
+  @apply bg-slate-700 text-white font-bold items-center justify-center rounded-t-md mx-1 h-[40px]  border-b-2 border-white px-[24px] py-2;
 }
 
 .alphabet-elements-container {

@@ -20,34 +20,32 @@ export default function EscAssembly() {
     );
   }
 
-  const alphabets = "abcdefghijklmnopqrstuvwxyz".split("");
+  const alphabetElements = "abcdefghijklmnopqrstuvwxyz"
+    .split("")
+    .map((letter) => {
+      const isSelected = selectedLetter.includes(letter);
+      const isCorrect = isSelected && currentWord.includes(letter);
+      const isWrong = isSelected && !currentWord.includes(letter);
 
-  const alphabetElements = alphabets.map((letter) => {
-    const isSelected = selectedLetter.includes(letter);
-    const isCorrect = isSelected && currentWord.includes(letter);
-    const isWrong = isSelected && !currentWord.includes(letter);
+      const className = clsx("alphabet-elements bg-[#2D519F]", {
+        correct: isCorrect,
+        wrong: isWrong,
+      });
 
-    const className = clsx("alphabet-elements bg-[#2D519F]", {
-      correct: isCorrect,
-      wrong: isWrong,
+      return (
+        <button
+          key={letter}
+          className={className}
+          onClick={() => addGuessedLetter(letter)}
+        >
+          {letter.toUpperCase()}
+        </button>
+      );
     });
 
-    return (
-      <button
-        key={letter}
-        className={className}
-        onClick={() => addGuessedLetter(letter)}
-      >
-        {letter.toUpperCase()}
-      </button>
-    );
-  });
-
-  const arrToString = currentWord.split("");
-
-  const wordElements = arrToString.map((word) => (
+  const wordElements = currentWord.split("").map((word) => (
     <span key={word} className="word-elements">
-      {word.toUpperCase()}
+      {selectedLetter.includes(word) ? word.toUpperCase() : ""}
     </span>
   ));
 
