@@ -7,37 +7,53 @@ import languages from "./languages";
 
 export default function EscAssembly() {
   const [currentWord, setCurrentWord] = useState("react");
+  const [selectedLetter, setSelectedLetter] = useState([]);
+  console.log(selectedLetter);
+
+  const selectedLetterElement = selectedLetter.map((letter) => (
+    <span className="text-3xl text-red-500" key={letter}>
+      {letter}
+    </span>
+  ));
+
+  function addGuessedLetter(newLetter) {
+    setSelectedLetter((prevSelectedLetter) =>
+      prevSelectedLetter.includes(newLetter)
+        ? prevSelectedLetter
+        : [...prevSelectedLetter, newLetter]
+    );
+  }
 
   const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
-  const alphabetElements = alphabet.map((word, id) => (
+  const alphabetElements = alphabet.map((letter) => (
     <button
-      key={id}
-      className="bg-[#2D519F] alphabet font-bold px-5 py-3 flex shadow-[0_1px_1px] hover:shadow-[0_2px_5px] transition-all cursor-pointer text-white shadow-white w-18 items-center flex-col rounded "
+      key={letter}
+      className="alphabet-elements"
+      onClick={() => addGuessedLetter(letter)}
     >
-      {word.toUpperCase()}
+      {letter.toUpperCase()}
     </button>
   ));
 
   const arrToString = currentWord.split("");
 
   const wordElements = arrToString.map((word, id) => (
-    <span
-      key={id}
-      className="bg-slate-600 rounded-t-md mx-1 border-b-2 border-white px-[24px] py-2"
-    >
+    <span key={id} className="word-elements">
       {word.toUpperCase()}
     </span>
   ));
 
   return (
-    <main className="flex min-h-screen  max-w-[780px] mx-auto bg-[#262730] items-center flex-col  border-lborder-r">
+    <main className="main-container">
       <header>
         <Title />
         <Description />
       </header>
+
       <Status />
-      <section className="flex items-center my-5 gap-2 justify-center flex-wrap max-w-[300px]">
+
+      <section className="language-container">
         {languages.map((lang) => (
           <Language
             key={lang.id}
@@ -47,16 +63,14 @@ export default function EscAssembly() {
           />
         ))}
       </section>
-      <span className="text-white font-bold flex items-center justify-center">
-        {wordElements}
-      </span>
 
-      <section className="flex items-center flex-wrap justify-center max-w-[650px] mt-5 p-1 gap-2">
+      <span className="word-elements-container">{wordElements}</span>
+
+      <section className="alphabet-elements-container">
         {alphabetElements}
       </section>
-      <button className="text-white bg-[#6457A6] hover:shadow-[0_0_3px] cursor-pointer transition-all px-8 py-3 my-10 font-black rounded-md">
-        New Game
-      </button>
+
+      <button className="btn-newgame">New Game</button>
     </main>
   );
 }

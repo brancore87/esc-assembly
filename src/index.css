@@ -9,16 +9,45 @@ body {
   --font-prompt: "Prompt", serif;
 }
 
+.main-container {
+  @apply flex min-h-screen  max-w-[780px] mx-auto bg-[#262730] items-center flex-col border-l border-r;
+}
+
+.language-container {
+  @apply flex items-center my-5 gap-2 justify-center flex-wrap max-w-[300px];
+}
+
+.word-elements-container {
+  @apply text-white font-bold flex items-center justify-center;
+}
+
+.word-elements {
+  @apply bg-slate-600 rounded-t-md mx-1 border-b-2 border-white px-[24px] py-2;
+}
+
+.alphabet-elements-container {
+  @apply flex items-center flex-wrap justify-center max-w-[650px] mt-5 p-1 gap-2;
+}
+
+.alphabet-elements {
+  @apply bg-[#2D519F] font-bold px-5 py-3 flex shadow-[0_1px_1px] hover:shadow-[0_2px_5px] transition-all cursor-pointer text-white shadow-white w-18 items-center flex-col rounded;
+}
+
+button {
+  @apply active:scale-95;
+}
+
+.btn-newgame {
+  @apply text-white bg-[#6457A6] hover:shadow-[0_0_3px] cursor-pointer transition-all px-8 py-3 my-6 font-black rounded-md;
+}
+
 .title,
 .description {
   text-shadow: 1px 5px 1px black;
   padding: 5px;
 }
+
 .status,
 .alphabet {
   text-shadow: 1px 5px 5px black;
-}
-
-button {
-  @apply active:scale-95;
 }
