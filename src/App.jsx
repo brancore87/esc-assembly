@@ -85,6 +85,7 @@ export default function EscAssembly() {
 
   return (
     <main className="main-container">
+      {isGameWon && <Confetti />}
       <header>
         <Title />
         <Description />
