@@ -67,6 +67,11 @@ export default function EscAssembly() {
     </span>
   ));
 
+  function resetGame() {
+    setCurrentWord(getRandomWords());
+    setSelectedLetter([]);
+  }
+
   return (
     <main className="main-container">
       <header>
@@ -103,7 +108,11 @@ export default function EscAssembly() {
       <section className="keyboard-elements-container">
         {keyboardElements}
       </section>
-      {isGameOver && <button className="btn-newgame">New Game</button>}
+      {isGameOver && (
+        <button className="btn-newgame" onClick={resetGame}>
+          New Game
+        </button>
+      )}
     </main>
   );
 }
