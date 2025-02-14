@@ -5,6 +5,7 @@ import Status from "./components/Status";
 import Language from "./components/Language";
 import languages from "./languages";
 import clsx from "clsx";
+import getFarewellText from "./utils";
 
 export default function EscAssembly() {
   // state values
@@ -22,7 +23,10 @@ export default function EscAssembly() {
 
   const isGameLost = wrongGuessedCount >= languages.length - 1;
   const isGameOver = isGameWon || isGameLost;
+  const languageNames = languages.map((lang) => lang.name);
+
   console.log(wrongGuessedCount);
+  console.log(languageNames);
 
   // static values
   const keyboardElements = "abcdefghijklmnopqrstuvwxyz"
@@ -74,12 +78,15 @@ export default function EscAssembly() {
         isGameOver={isGameOver}
         isGameWon={isGameWon}
         isGameLost={isGameLost}
+        wrongGuessedCount={wrongGuessedCount}
+        getFarewellText={() =>
+          getFarewellText(languageNames[wrongGuessedCount - 1])
+        }
       />
 
       <section className="language-container">
         {languages.map((lang, index) => {
           const isLanguageLost = index < wrongGuessedCount;
-
           const className = clsx("language", isLanguageLost && "lost");
           return (
             <Language
@@ -92,13 +99,10 @@ export default function EscAssembly() {
           );
         })}
       </section>
-
       <span className="word-elements-container">{wordElements}</span>
-
       <section className="keyboard-elements-container">
         {keyboardElements}
       </section>
-
       {isGameOver && <button className="btn-newgame">New Game</button>}
     </main>
   );

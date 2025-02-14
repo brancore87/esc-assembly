@@ -18,11 +18,11 @@ body {
 }
 
 .word-elements-container {
-  @apply text-white font-bold flex items-center justify-center;
+  @apply text-white text-xl md:text-3xl font-bold flex items-center justify-center;
 }
 
 .word-elements {
-  @apply bg-slate-700 text-white font-bold items-center justify-center rounded-t-md mx-1 h-[40px]  border-b-2 border-white px-[24px] py-2;
+  @apply bg-slate-700 text-white font-bold items-center justify-center rounded-t-md mx-1 h-[40px] md:h-[50px] border-b-2 border-white md:px-[34px] px-[24px] py-2;
 }
 
 .keyboard-elements-container {

@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Status(props) {
   const className =
-    "flex flex-col items-center justify-center py-2 my-2  font-bold w-[380px] h-[88px] status rounded-md text-xl";
+    "flex flex-col items-center justify-center py-2 my-2 font-bold w-[380px] h-[88px] status rounded-md text-xl";
 
   const gameWon = (
     <>
@@ -31,19 +31,35 @@ export default function Status(props) {
       </div>
     </>
   );
+  const farewellText = (
+    <>
+      <div>
+        <span>🙋🏻‍♂️</span>
+        {props.getFarewellText(props.name)}
+        <span>🫂</span>
+      </div>
+    </>
+  );
 
   return (
     <section
       className={clsx(
         className,
+        props.className,
         props.isGameOver
           ? props.isGameWon
             ? "bg-[#10A95B] text-amber-300"
             : "bg-[#BA2A2A] text-white"
-          : null
+          : props.wrongGuessedCount && "bg-purple-700 rounded-xl text-white"
       )}
     >
-      {props.isGameOver ? (props.isGameWon ? gameWon : gameLost) : null}
+      {props.isGameOver
+        ? props.isGameWon
+          ? gameWon
+          : gameLost
+        : props.wrongGuessedCount
+        ? farewellText
+        : ""}
     </section>
   );
 }
