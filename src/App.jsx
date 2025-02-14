@@ -124,7 +124,6 @@ export default function EscAssembly() {
           New Game
         </button>
       )}
-      {isGameWon && <Confetti />}
     </main>
   );
 }
