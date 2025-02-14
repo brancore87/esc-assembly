@@ -8,29 +8,38 @@ import clsx from "clsx";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function EscAssembly() {
+  // state values
   const [currentWord, setCurrentWord] = useState("react");
   const [selectedLetter, setSelectedLetter] = useState([]);
 
-  function addGuessedLetter(newLetter) {
-    toast.success(newLetter);
-    setSelectedLetter((prevSelectedLetter) =>
-      prevSelectedLetter.includes(newLetter)
-        ? prevSelectedLetter
-        : [...prevSelectedLetter, newLetter]
-    );
-  }
+  // derived values
+  const wrongGuessArray = selectedLetter.filter(
+    (letter) => !currentWord.includes(letter)
+  );
 
-  const alphabetElements = "abcdefghijklmnopqrstuvwxyz"
+  console.log(wrongGuessArray.length);
+
+  // static values
+  const keyboardElements = "abcdefghijklmnopqrstuvwxyz"
     .split("")
     .map((letter) => {
       const isSelected = selectedLetter.includes(letter);
       const isCorrect = isSelected && currentWord.includes(letter);
       const isWrong = isSelected && !currentWord.includes(letter);
 
-      const className = clsx("alphabet-elements bg-[#2D519F]", {
+      const className = clsx("keyboard-elements bg-[#2D519F]", {
         correct: isCorrect,
         wrong: isWrong,
       });
+
+      function addGuessedLetter(newLetter) {
+        toast.success(newLetter);
+        setSelectedLetter((prevSelectedLetter) =>
+          prevSelectedLetter.includes(newLetter)
+            ? prevSelectedLetter
+            : [...prevSelectedLetter, newLetter]
+        );
+      }
 
       return (
         <button
@@ -71,8 +80,8 @@ export default function EscAssembly() {
 
       <span className="word-elements-container">{wordElements}</span>
 
-      <section className="alphabet-elements-container">
-        {alphabetElements}
+      <section className="keyboard-elements-container">
+        {keyboardElements}
       </section>
 
       <button className="btn-newgame">New Game</button>

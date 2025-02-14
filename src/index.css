@@ -25,11 +25,11 @@ body {
   @apply bg-slate-700 text-white font-bold items-center justify-center rounded-t-md mx-1 h-[40px]  border-b-2 border-white px-[24px] py-2;
 }
 
-.alphabet-elements-container {
+.keyboard-elements-container {
   @apply flex items-center flex-wrap justify-center max-w-[650px] mt-5 p-1 gap-2;
 }
 
-.alphabet-elements {
+.keyboard-elements {
   @apply font-bold px-5 py-3 flex shadow-[0_1px_1px] hover:shadow-[0_2px_5px] transition-all cursor-pointer text-white shadow-white w-18 items-center flex-col rounded;
 }
 
