@@ -22,7 +22,7 @@ body {
 }
 
 .word-elements {
-  @apply bg-slate-700 text-white font-bold items-center justify-center rounded-t-md mx-1 h-[40px]  border-b-2 border-white m-2 md:px-[34px] px-[24px] py-2;
+  @apply bg-slate-700 text-white font-bold items-center justify-center rounded-t-md mx-1 h-[40px] flex  border-b-2 border-white m-2 px-[24px] py-2;
 }
 
 .keyboard-elements-container {
