@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Status(props) {
   const className =
-    "flex flex-col items-center justify-center py-2 my-2 font-bold w-[380px] h-[88px] status rounded  text-xl";
+    "flex flex-col items-center justify-center py-2 my-2 font-bold w-[350px] h-[88px] text-center rounded ";
 
   const gameWon = (
     <>
