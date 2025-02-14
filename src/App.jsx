@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Title from "./components/Title";
 import Description from "./components/Description";
 import Status from "./components/Status";
 import Language from "./components/Language";
-import languages from "./languages";
+import languages from "./data/languages";
 import clsx from "clsx";
-import getFarewellText from "./utils";
+import { getRandomWords, getFarewellText } from "./lib/utils";
 
 export default function EscAssembly() {
   // state values
-  const [currentWord, setCurrentWord] = useState("react");
+  const [currentWord, setCurrentWord] = useState(() => getRandomWords());
   const [selectedLetter, setSelectedLetter] = useState([]);
 
   // derived values
@@ -24,9 +24,6 @@ export default function EscAssembly() {
   const isGameLost = wrongGuessedCount >= languages.length - 1;
   const isGameOver = isGameWon || isGameLost;
   const languageNames = languages.map((lang) => lang.name);
-
-  console.log(wrongGuessedCount);
-  console.log(languageNames);
 
   // static values
   const keyboardElements = "abcdefghijklmnopqrstuvwxyz"
@@ -56,6 +53,8 @@ export default function EscAssembly() {
           className={className}
           onClick={() => addGuessedLetter(letter)}
           disabled={isGameOver}
+          aria-disabled={isGameOver}
+          aria-label={`Letter ${letter}`}
         >
           {letter.toUpperCase()}
         </button>
