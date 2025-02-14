@@ -15,7 +15,11 @@ export default function EscAssembly() {
   // derived values
   const wrongGuessArray = selectedLetter.filter(
     (letter) => !currentWord.includes(letter)
+<<<<<<< HEAD
   );
+=======
+  ).length;
+>>>>>>> 0a649f9 (added wrong guessed count)
 
   console.log(wrongGuessArray.length);
 
