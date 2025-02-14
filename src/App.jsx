@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Title from "./components/Title";
 import Description from "./components/Description";
 import Status from "./components/Status";
 import Language from "./components/Language";
 import languages from "./languages";
 import clsx from "clsx";
-import toast, { Toaster } from "react-hot-toast";
 
 export default function EscAssembly() {
+  //    * Challenge:
+  //  * 1. Create a variable `isGameOver` which evaluates to `true`
+  //  *    if the user has guessed incorrectly 8 times. Consider how
+  //  *    we might make this more dynamic if we were ever to add or
+  //  *    remove languages from the languages array.
+  //  * 2. Conditionally render the New Game button only if the game
+  //  *    is over.
+  //
   // state values
   const [currentWord, setCurrentWord] = useState("react");
   const [selectedLetter, setSelectedLetter] = useState([]);
@@ -15,13 +22,15 @@ export default function EscAssembly() {
   // derived values
   const wrongGuessedCount = selectedLetter.filter(
     (letter) => !currentWord.includes(letter)
-<<<<<<< HEAD
-  );
-=======
   ).length;
->>>>>>> 0a649f9 (added wrong guessed count)
 
-  console.log(wrongGuessedCount);
+  const isGameWon = currentWord
+    .split("")
+    .every((letter) => selectedLetter.includes(letter));
+
+  const isGameLost = wrongGuessedCount >= languages.length - 1;
+  const isGameOver = isGameWon || isGameLost;
+  console.log(isGameOver);
 
   // static values
   const keyboardElements = "abcdefghijklmnopqrstuvwxyz"
@@ -37,7 +46,7 @@ export default function EscAssembly() {
       });
 
       function addGuessedLetter(newLetter) {
-        toast.success(newLetter);
+        // toast.success(newLetter);
         setSelectedLetter((prevSelectedLetter) =>
           prevSelectedLetter.includes(newLetter)
             ? prevSelectedLetter
@@ -74,6 +83,7 @@ export default function EscAssembly() {
       <section className="language-container">
         {languages.map((lang, index) => {
           const isLanguageLost = index < wrongGuessedCount;
+
           const className = clsx("language", isLanguageLost && "lost");
           return (
             <Language
@@ -93,8 +103,7 @@ export default function EscAssembly() {
         {keyboardElements}
       </section>
 
-      <button className="btn-newgame">New Game</button>
-      <Toaster position="top-right" />
+      {isGameOver && <button className="btn-newgame">New Game</button>}
     </main>
   );
 }
