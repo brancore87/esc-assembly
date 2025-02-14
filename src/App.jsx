@@ -55,6 +55,7 @@ export default function EscAssembly() {
           key={letter}
           className={className}
           onClick={() => addGuessedLetter(letter)}
+          disabled={isGameOver}
         >
           {letter.toUpperCase()}
         </button>

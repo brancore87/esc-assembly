@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Status(props) {
   const className =
-    "flex flex-col items-center justify-center py-2 my-2 font-bold w-[380px] h-[88px] status rounded-md text-xl";
+    "flex flex-col items-center justify-center py-2 my-2 font-bold w-[380px] h-[88px] status rounded  text-xl";
 
   const gameWon = (
     <>
@@ -50,7 +50,7 @@ export default function Status(props) {
           ? props.isGameWon
             ? "bg-[#10A95B] text-amber-300"
             : "bg-[#BA2A2A] text-white"
-          : props.wrongGuessedCount && "bg-purple-700 rounded-xl text-white"
+          : props.wrongGuessedCount && "bg-purple-700  text-white"
       )}
     >
       {props.isGameOver
