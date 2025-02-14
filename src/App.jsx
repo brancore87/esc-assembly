@@ -13,7 +13,7 @@ export default function EscAssembly() {
   const [selectedLetter, setSelectedLetter] = useState([]);
 
   // derived values
-  const wrongGuessArray = selectedLetter.filter(
+  const wrongGuessedCount = selectedLetter.filter(
     (letter) => !currentWord.includes(letter)
 <<<<<<< HEAD
   );
@@ -21,7 +21,7 @@ export default function EscAssembly() {
   ).length;
 >>>>>>> 0a649f9 (added wrong guessed count)
 
-  console.log(wrongGuessArray.length);
+  console.log(wrongGuessedCount);
 
   // static values
   const keyboardElements = "abcdefghijklmnopqrstuvwxyz"
@@ -72,14 +72,19 @@ export default function EscAssembly() {
       <Status />
 
       <section className="language-container">
-        {languages.map((lang) => (
-          <Language
-            key={lang.id}
-            name={lang.name}
-            backgroundColor={lang.backgroundColor}
-            color={lang.color}
-          />
-        ))}
+        {languages.map((lang, index) => {
+          const isLanguageLost = index < wrongGuessedCount;
+          const className = clsx("language", isLanguageLost && "lost");
+          return (
+            <Language
+              key={lang.id}
+              name={lang.name}
+              backgroundColor={lang.backgroundColor}
+              color={lang.color}
+              className={className}
+            />
+          );
+        })}
       </section>
 
       <span className="word-elements-container">{wordElements}</span>

@@ -59,3 +59,21 @@ button {
 .wrong {
   background-color: #ec5d49;
 }
+
+span.language {
+  @apply relative rounded font-black p-1 gap-1 shadow-[1px_1px_3px] shadow-black;
+}
+
+span.language.lost::before {
+  content: "☠️";
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  font-size: 1.5rem;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
