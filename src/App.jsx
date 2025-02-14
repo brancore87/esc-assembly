@@ -6,6 +6,7 @@ import Language from "./components/Language";
 import languages from "./data/languages";
 import clsx from "clsx";
 import { getRandomWords, getFarewellText } from "./lib/utils";
+import Confetti from "react-confetti";
 
 export default function EscAssembly() {
   // state values
@@ -61,11 +62,21 @@ export default function EscAssembly() {
       );
     });
 
-  const wordElements = currentWord.split("").map((word) => (
-    <span key={word} className="word-elements">
-      {selectedLetter.includes(word) ? word.toUpperCase() : ""}
-    </span>
-  ));
+  const wordElements = currentWord.split("").map((word, index) => {
+    const shouldRevealLetter = isGameLost || selectedLetter.includes(word);
+
+    return (
+      <span
+        key={index}
+        className={clsx(
+          "word-elements",
+          isGameLost && !selectedLetter.includes(word) && "missed-word"
+        )}
+      >
+        {shouldRevealLetter ? word.toUpperCase() : ""}
+      </span>
+    );
+  });
 
   function resetGame() {
     setCurrentWord(getRandomWords());
@@ -113,6 +124,7 @@ export default function EscAssembly() {
           New Game
         </button>
       )}
+      {isGameWon && <Confetti />}
     </main>
   );
 }

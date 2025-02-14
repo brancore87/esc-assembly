@@ -73,3 +73,7 @@ span.language.lost::before {
   left: 0;
   background-color: rgba(0, 0, 0, 0.7);
 }
+
+.missed-word {
+  @apply text-red-500;
+}
